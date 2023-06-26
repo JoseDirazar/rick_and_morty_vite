@@ -32,7 +32,7 @@ function Card({
         setIsFav(true);
       }
     });
-  });
+  }, []);
   return (
     <div className={style.cardContainer}>
       {/* { isFav ? (
@@ -42,7 +42,7 @@ function Card({
             ) } */}
         <button className={style.favoriteButton} onClick={handleFavorite}>{isFav ? "❤️" : "🤍"}</button>
         <button className={style.closeButton} onClick={() => onClose(id)}>X</button>
-      <div classname={style.imageWrapper}>
+      <div className={style.imageWrapper}>
         <img className={style.img} src={image} alt={name} />
       </div>
       <div className={style.infoWrapper}>

@@ -9,16 +9,20 @@ import Detail from './components/Detail/Detail';
 import Form from './components/Form/Form';
 import Error404 from './components/Error404/Error404';
 import Favorites from './components/Favorites/Favorites';
+import { useSelector, useDispatch } from "react-redux";
+import { addChar, removeChar, removeFav } from "./redux/actions";
+import CreateCharacter from "./components/CreateCaracter/CreateCaracter";
 
 
 function App() {
 
    const EMAIL = 'jo@gmail.com';
-   const PASSWORD = '123123';
+   const PASSWORD = '123qweDSA';
 
    const navigate = useNavigate();
 
    const [access, setAccess] = useState(false);
+   const dispatch = useDispatch()
 
    
 
@@ -36,9 +40,9 @@ function App() {
       navigate("/");
    }
 
-   const [characters, setCharacters] = useState([])
+   //const [characters, setCharacters] = useState([])
    //console.log(characters)
-   
+   const {characters }= useSelector(store => store)
    function onSearch(id) {
       //console.log(id)
         
@@ -46,7 +50,7 @@ function App() {
       if (data.name) {
          const char = characters.find((ch) => ch.id === Number(id))
          if(char) return alert("El personaje ya existe")
-         setCharacters((oldChars) => [...oldChars, data]);
+         dispatch(addChar(data));
       } else {
          window.alert('¡No hay personajes con este ID!');
       }
@@ -67,26 +71,49 @@ function App() {
 
 
    function onClose(id) {
-      const idBuscado = Number(id)
-      //console.log(idBuscado)
-      const notID = characters.filter(e => e.id !== idBuscado)
-      setCharacters(notID)
+      dispatch(removeChar(Number(id)));
+      dispatch(removeFav(Number(id)));
    }
+
+   
+
+   useEffect(() => {
+      const requests = [];
+      for (let num = 22; num < 24; num++) {
+        requests.push(
+          axios.get(`https://rickandmortyapi.com/api/character?page=${num}`)
+        );
+      }
+      Promise.all(requests)
+        .then((results) => {
+          // console.log(":::", results);
+          let newCharacters = [];
+          results.map(
+            (chars) => (newCharacters = [...newCharacters, ...chars.data.results])
+          );
+          // console.log(":::", newCharacters);
+          dispatch(addChar([...newCharacters]));
+          //TODO: para cuando llevemos los characters al store (state global) de redux
+          // dispatch(addCharacter(newCharacters))
+        })
+        .catch((error) => {});
+    }, []);
 
    const location = useLocation()
    
    return (
       <div className='App' >
-         {/* {location.pathname !== "/" && location.pathname !== "/home" && location.pathname !== "/about" && location.pathname !== `/detail/${id}` ? <Error404 /> : null} */}
          
-         {location.pathname !== '/' && <Nav onSearch={onSearch} setAcces={setAccess} logOut={logOut}/>}
+         
+         {location.pathname !== '/' && <Nav onSearch={onSearch} logOut={logOut}/>}
          <Routes>
             <Route path="/" element={<Form  login={login}/>} />
-            <Route path="/home" element={<Cards characters={characters} onClose={onClose}/>}/>
+            <Route path="/home" element={<Cards  onClose={onClose}/>}/>
             <Route path="/about" element={<About />}/>
             <Route path="/detail/:id" element={<Detail />}/>
             <Route path="*" element={<Error404/>} />
             <Route path="/favorites" element={<Favorites/>} />
+            <Route path="/create" element={<CreateCharacter />}></Route>
          </Routes>
          
          

@@ -1,25 +1,27 @@
-import SearchBar from "../SearchBar/SearchBar"
-import { NavLink } from "react-router-dom"
+import SearchBar from "../SearchBar/SearchBar";
+import { NavLink } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
-export default function Nav({onSearch, setAcces, logOut}) {
-    /* const handleLogOut = () => {
-        setAcces(false)
-    } */
-    return(
-        <nav className="navContainer">
-        <div className="navButtons">
-            <NavLink to="/home">
-                <button>Home</button>
-            </NavLink>
-            <NavLink to="/favorites">
-                <button>Favorites</button>
-            </NavLink>
-            <NavLink to="/about">
-                <button>About</button>
-            </NavLink>
-        </div>
-         <button onClick={logOut /* handleLogOut */}>LogOut</button>
-        <SearchBar onSearch={onSearch}/>
-        </nav>
-    )
+export default function Nav({ onSearch, logOut }) {
+  const {pathname} = useLocation()
+  return (
+    <nav className="navContainer">
+      <div className="navButtons">
+        <NavLink to="/home">
+          <button>Home</button>
+        </NavLink>
+        <NavLink to="/favorites">
+          <button>Favorites</button>
+        </NavLink>
+        <NavLink to="/about">
+          <button>About</button>
+        </NavLink>
+        <NavLink to={"/create"}>
+          <div>Create</div>
+        </NavLink>
+      </div>
+      <button onClick={logOut}>LogOut</button>
+      {pathname === "/home" && <SearchBar onSearch={onSearch} />}
+    </nav>
+  );
 }

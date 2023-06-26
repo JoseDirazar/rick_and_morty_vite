@@ -1,30 +1,37 @@
-import Card from '../Card/Card';
-import style from "./Cards.module.css"
-
+import Card from "../Card/Card";
+import style from "./Cards.module.css";
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import Paginate from "../Paginate/Paginate";
 
 //import "./css/Cards.css"
 
-export default function Cards({ characters, onClose }) {
-   //console.log(characters)
-   return <div className={style.cardsContainer}>
-      {characters.map(e => {
-         return <>
-            <Card
-            id={e.id}
-            name={e.name}
-            status={e.status}
-            species={e.species}
-            gender={e.gender}
-            origin={e.origin.name}
-            image={e.image}
-            onClose={onClose}
-            />
-         </>
-      })}
-   </div>;
+export default function Cards({ onClose }) {
+  const { characters, numPage } = useSelector((state) => state);
+
+  const cantCharPerPage = 6;
+  // numPage    -> 1        2       3
+  let desde = (numPage - 1) * cantCharPerPage; // 0          4     8
+  let hasta = numPage * cantCharPerPage; //  4          8     12
+
+  let cantPage = Math.floor(characters.length / cantCharPerPage);
+
+  const viewCharacters = characters?.slice(desde, hasta);
+
+  return (
+   <div>
+     <div className={style.cards}>
+       {/* <h2>Estamos en el home y podemos mostrar y/o ver nuestras cards</h2> */}
+       {viewCharacters?.map((char, index) => {
+         return <Card key={char.id} name={char.name} species={char.species} id={char.id} gender={char.gender} image={char.image} onClose={onClose} />;
+       })}
+     </div>
+     <div>
+
+     </div>
+     <Paginate numPage={numPage} cantPage={cantPage} />
+   </div>
+ );
 }
-
-
 
 /* class Cards extends React.Component{
    constructor(props) {
@@ -70,5 +77,3 @@ const mapDispatchToProps = (dispatch) => {
  export default connect(mapStateToProps, mapDispatchToProps)(Cards) */
 //mapStateToProps permite acceder al estado global
 //mapDispatchToProps permite despachar acciones al reducer
-
-
