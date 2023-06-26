@@ -1,5 +1,5 @@
 import style from "./Card.module.css"
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { addFav, removeFav } from "../../redux/actions";
 import { connect } from "react-redux";
 import { useEffect, useState } from "react";
@@ -32,16 +32,14 @@ function Card({
         setIsFav(true);
       }
     });
-  }, []);
+  }, [myFavorites]);
+
+  const {pathname} = useLocation()
+
   return (
     <div className={style.cardContainer}>
-      {/* { isFav ? (
-               <button onClick={handleFavorite}>3</button>
-            ) : (
-               <button onClick={handleFavorite}>e</button>
-            ) } */}
         <button className={style.favoriteButton} onClick={handleFavorite}>{isFav ? "❤️" : "🤍"}</button>
-        <button className={style.closeButton} onClick={() => onClose(id)}>X</button>
+       {pathname !== "/favorites" && <button className={style.closeButton} onClick={() => onClose(id)}>X</button>}
       <div className={style.imageWrapper}>
         <img className={style.img} src={image} alt={name} />
       </div>

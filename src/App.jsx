@@ -72,7 +72,7 @@ function App() {
 
    function onClose(id) {
       dispatch(removeChar(Number(id)));
-      dispatch(removeFav(Number(id)));
+      //dispatch(removeFav(Number(id)));
    }
 
    
