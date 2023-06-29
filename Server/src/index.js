@@ -1,23 +1,31 @@
 let http = require("http");
-const url = require("url");
-let data = require("./utils/data");
+const characters = require("./utils/data.js");
+const { getCharacterId } = require("./controllers/characters.js");
+
+
+
 const PORT = 3001;
 
 http
   .createServer((req, res) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
-    if (req.url.includes("/rickandmorty/character")) {
-      const parsedUrl = url.parse(req.url, true);
-      const characterId = parsedUrl.pathname.split("/").pop();
-      const dataCharacter = data.find(
-        (character) => character.id === characterId
-      );
-      if (dataCharacter) {
-        return res.writeHead(200, { "Content-Type": "application/json" }).end(JSON.stringify(dataCharacter));
-      } else {
-        return res.writeHead(404, { "Content-Type": "text/plain" }).end("json not found");
-      }
-      return;
+    const url = req.url.split("/");
+    const part1 = url[1]; 
+    const part2 = url[2];
+    const id = url[3];
+    console.log(url)
+    if (part1 === "rickandmorty" && part2 === "characters") {
+      return res
+        .writeHead(200, { "Content-Type": "application/json" })
+        .end(JSON.stringify(characters)); 
+    }
+    if (part1 === "rickandmorty" && part2 === "character") { 
+      return getCharacterId(req, res, id); 
+    }
+    if (req.url === "/") {      
+      return res  
+        .writeHead(200, { "Content-Type": "text/plain" })
+        .end("Server Rick & Morty");
     }
   })
   .listen(PORT, () => {
