@@ -9,9 +9,9 @@ export default function Cards({ onClose }) {
   const { characters, numPage } = useSelector((state) => state);
 
   const cantCharPerPage = 6;
-  // numPage    -> 1        2       3
-  let desde = (numPage - 1) * cantCharPerPage; // 0          4     8
-  let hasta = numPage * cantCharPerPage; //  4          8     12
+  
+  let desde = (numPage - 1) * cantCharPerPage;
+  let hasta = numPage * cantCharPerPage; 
 
   let cantPage = Math.floor(characters.length / cantCharPerPage);
 

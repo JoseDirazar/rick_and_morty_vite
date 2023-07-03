@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import Card from "../Card/Card"
 import { useState } from "react"
 import {  useDispatch, useSelector } from "react-redux"
@@ -9,6 +9,10 @@ const Favorites = ({myFavorites}) => {
     
     const store = useSelector(state => state.myFavorites)
     const dispatch = useDispatch()
+
+    /* useEffect(() => {
+        axios.get()
+    }) */
     
     const [aux, setAux] = useState(false)
     function handleOrder(event) {
@@ -17,6 +21,7 @@ const Favorites = ({myFavorites}) => {
     }
     function handleFilter(event) {
         dispatch(filterCards(event.target.value))
+
     }
     return (
         <div>
