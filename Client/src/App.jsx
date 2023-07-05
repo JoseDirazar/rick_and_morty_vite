@@ -10,7 +10,7 @@ import Form from "./components/Form/Form";
 import Error404 from "./components/Error404/Error404";
 import Favorites from "./components/Favorites/Favorites";
 import { useSelector, useDispatch } from "react-redux";
-import { addChar, removeChar, removeFav } from "./redux/actions";
+import { addChar, removeChar, removeFav, addFav } from "./redux/actions";
 import CreateCharacter from "./components/CreateCaracter/CreateCaracter";
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
   const [access, setAccess] = useState(false);
   const dispatch = useDispatch();
 
-  function login(userData) {
+  /* function login(userData) {
     const { email, password } = userData;
     const URL = 'http://localhost:3001/rickandmorty/login/';
     axios(URL + `?email=${email}&password=${password}`).then(({ data }) => {
@@ -31,7 +31,23 @@ function App() {
        //setAccess(access)
        access && navigate('/home');
     });
- }
+ } */
+ async function login(inputs) {
+  try {
+    const { data } = await axios.get(
+      `http://localhost:3001/rickandmorty/login?password=${inputs.password}&email=${inputs.email}`
+    );
+    if (data.access) {
+      setAccess(true);
+      navigate("/home");
+      return alert("bienvenidos!!!");
+    } else {
+      return alert("no es el usuario");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
 
   function logOut() {
     setAccess(false);
@@ -72,6 +88,19 @@ function App() {
     dispatch(removeChar(Number(id)));
     //dispatch(removeFav(Number(id)));     //commented dont remove of Fav onClose
   }
+
+  useEffect(() => { // recarga los fav guardados en el Back
+    async function inEffect() {
+      try {
+        const {data} = await axios.get(`http://localhost:3001/rickandmorty/fav`)
+        data.forEach(character => dispatch(addFav(character)))
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    inEffect()
+   // dispatch(addFav({ id: "RELOAD" }));
+  }, []);
 
   useEffect(() => {
     const requests = [];

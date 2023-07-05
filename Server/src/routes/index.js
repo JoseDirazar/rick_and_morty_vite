@@ -22,9 +22,11 @@ router.post('/fav', (req,res) => {
 });
 
 router.get("/fav", getFav)
+
+router.delete('/fav/:id', deleteFav); // es lo misomo!!!!!
+
 router.get('/page/:num', getPage)
 
 
-router.delete('/fav/:id', deleteFav); // es lo misomo!!!!!
 
 module.exports = router

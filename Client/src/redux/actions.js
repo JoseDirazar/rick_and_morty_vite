@@ -41,15 +41,29 @@ export const orderCards = (orden) => {
 };
 
 export const addFav = (character) => {
-  const endpoint = 'http://localhost:3001/rickandmorty/fav';
-  return (dispatch) => {
+  //const endpoint = 'http://localhost:3001/rickandmorty/fav';
+  return async function (dispatch) {
+    try {
+      const { data } = await axios.post(
+        `http://localhost:3001/rickandmorty/fav`,
+        character
+      );
+      return dispatch({
+        type: ADD_FAV,
+        payload: data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  /* return (dispatch) => {
      axios.post(endpoint, character).then(({ data }) => {
         return dispatch({
            type: 'ADD_FAV',
            payload: data,
         });
      });
-  };
+  }; */
 };
 
 // export const addFav = (character) => {

@@ -1,4 +1,6 @@
 const users = require("../utils/Users");
+
+let status = false
 function login(req, res) {
   const { email, password } = req.query;
   const logueando = users.find(
@@ -6,8 +8,8 @@ function login(req, res) {
   );
 
   return logueando
-    ? res.status(200).json({ access: true })
-    : res.status(500).json({ access: false });
+    ? res.status(200).json({ access: !status })
+    : res.status(500).json({ access: status });
 }
 module.exports = {
     login
