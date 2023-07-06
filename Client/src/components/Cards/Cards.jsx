@@ -8,7 +8,7 @@ import Paginate from "../Paginate/Paginate";
 export default function Cards({ onClose }) {
   const { characters, numPage } = useSelector((state) => state);
 
-  const cantCharPerPage = 6;
+  const cantCharPerPage = 14;
 
   let desde = (numPage - 1) * cantCharPerPage;
   let hasta = numPage * cantCharPerPage;
@@ -35,7 +35,6 @@ export default function Cards({ onClose }) {
           );
         })}
       </div>
-      <div></div>
       <Paginate numPage={numPage} cantPage={cantPage} />
     </div>
   );

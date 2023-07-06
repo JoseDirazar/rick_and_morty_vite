@@ -137,7 +137,7 @@ function App() {
 
   useEffect(() => {
     const requests = [];
-    for (let num = 52; num < 55; num++) {
+    for (let num = 48; num < 55; num++) {
       requests.push(
         axios.get(`http://localhost:3001/rickandmorty/page/${num}`)
       );

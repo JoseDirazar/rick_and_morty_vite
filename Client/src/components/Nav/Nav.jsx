@@ -1,23 +1,24 @@
 import SearchBar from "../SearchBar/SearchBar";
 import { NavLink } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import style from "./Nav.module.css";
 
 export default function Nav({ onSearch, logOut }) {
-  const {pathname} = useLocation()
+  const { pathname } = useLocation();
   return (
-    <nav className="navContainer">
+    <nav className={style.nav}>
       <div className="navButtons">
-        <NavLink to="/home">
-          <button>Home</button>
+        <NavLink className={style.link} to="/home">
+          Home
         </NavLink>
-        <NavLink to="/favorites">
-          <button>Favorites</button>
+        <NavLink className={style.link} to="/favorites">
+          Favorites
         </NavLink>
-        <NavLink to="/about">
-          <button>About</button>
+        <NavLink className={style.link} to="/about">
+          About
         </NavLink>
-        <NavLink to={"/create"}>
-          <div>Create</div>
+        <NavLink className={style.link}  to={"/create"}>
+          Create
         </NavLink>
       </div>
       <button onClick={logOut}>LogOut</button>

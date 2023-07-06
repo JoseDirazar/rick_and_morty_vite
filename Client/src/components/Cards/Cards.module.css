@@ -1,10 +1,28 @@
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  justify-content: space-around;
+  grid-gap: 20px;
+  justify-items: center;
+  padding: 2px 40px;
+  margin: 20px 40px;
+}
 
-.cardsContainer {
+
+@media screen and (max-width: 825px) {
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+/* 
+.cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     grid-gap: 20px;
     justify-items: center;
     min-width: 95%;
     justify-content: space-evenly;
+    background-color: aqua;
     
-  }
+  } */

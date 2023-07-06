@@ -37,19 +37,28 @@ function Card({
   const {pathname} = useLocation()
 
   return (
-    <div className={style.cardContainer}>
-        <button className={style.favoriteButton} onClick={handleFavorite}>{isFav ? "❤️" : "🤍"}</button>
-       {pathname !== "/favorites" && <button className={style.closeButton} onClick={() => onClose(id)}>X</button>}
-      <div className={style.imageWrapper}>
-        <img className={style.img} src={image} alt={name} />
-      </div>
-      <div className={style.infoWrapper}>
-        <NavLink className={style.navLink} to={`/detail/${id}`}>
-          <h2 className={style.name}>{name}</h2>
-        </NavLink>
+    <div className={style.card}>
 
-        <h2 className={style.gender}>{gender}</h2>
+      <div className={style.close}>
+
+        <button  onClick={handleFavorite}>{isFav ? "❤️" : "🤍"}</button>
+
+        {pathname !== "/favorites" && <button  onClick={() => onClose(id)}>X</button>}
+        
       </div>
+
+      <div className={style.info}>
+
+        <img src={image} alt={name} />
+
+        <NavLink className={style.link} to={`/detail/${id}`}>
+          <h2>{name}</h2>
+        </NavLink>
+        
+        <h2>{species}</h2>
+
+      </div>
+
     </div>
   );
 }
