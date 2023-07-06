@@ -1,5 +1,5 @@
 let myFavorites = [];
-console.log(myFavorites)
+console.log(myFavorites)  
 
 function postFav(req, res) {
   const pj = req.body;

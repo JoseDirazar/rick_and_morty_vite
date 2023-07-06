@@ -38,6 +38,7 @@ function App() {
       `http://localhost:3001/rickandmorty/login?password=${inputs.password}&email=${inputs.email}`
     );
     if (data.access) {
+      
       setAccess(true);
       navigate("/home");
       return alert("bienvenidos!!!");
@@ -49,14 +50,27 @@ function App() {
   }
 }
 
-  function logOut() {
-    setAccess(false);
-    navigate("/");
+  async function logOut() {
+    try {
+      const {data}= await axios.get(
+        "http://localhost:3001/rickandmorty/logout"
+      );
+      setAccess(false);
+      
+      return alert("Hasta luego!");     
+      
+    } catch (error) {
+      console.log(error);
+    }
+    // setAccess(false);
+    // navigate("/");
   }
 
   //const [characters, setCharacters] = useState([])
   //console.log(characters)
+
   const { characters } = useSelector((store) => store);
+
   function onSearch(id) {
     //console.log(id)
 
@@ -79,7 +93,26 @@ function App() {
       });
   }
 
+  
   useEffect(() => {
+    async function inEffect() {
+      try {
+      const { data } = await axios.get(
+        `http://localhost:3001/rickandmorty/login`
+      );
+      if (data.access) {
+        setAccess(true);
+        console.log("Response del Back: ",data.access)
+        navigate("/home");
+        return
+      } else {
+        console.log("Response del Back: ", data.access)
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    }
+    inEffect()
     !access && navigate("/");
     //if(!access) navigate("/")
   }, [access]);

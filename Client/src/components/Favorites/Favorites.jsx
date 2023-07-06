@@ -10,9 +10,7 @@ const Favorites = ({myFavorites}) => {
     const store = useSelector(state => state.myFavorites)
     const dispatch = useDispatch()
 
-    /* useEffect(() => {
-        axios.get()
-    }) */
+   
     
     const [aux, setAux] = useState(false)
     function handleOrder(event) {

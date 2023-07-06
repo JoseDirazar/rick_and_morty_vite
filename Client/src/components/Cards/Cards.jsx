@@ -9,28 +9,36 @@ export default function Cards({ onClose }) {
   const { characters, numPage } = useSelector((state) => state);
 
   const cantCharPerPage = 6;
-  
+
   let desde = (numPage - 1) * cantCharPerPage;
-  let hasta = numPage * cantCharPerPage; 
+  let hasta = numPage * cantCharPerPage;
 
   let cantPage = Math.floor(characters.length / cantCharPerPage);
 
   const viewCharacters = characters?.slice(desde, hasta);
 
   return (
-   <div>
-     <div className={style.cards}>
-       {/* <h2>Estamos en el home y podemos mostrar y/o ver nuestras cards</h2> */}
-       {viewCharacters?.map((char, index) => {
-         return <Card key={char.id} name={char.name} species={char.species} id={char.id} gender={char.gender} image={char.image} onClose={onClose} />;
-       })}
-     </div>
-     <div>
-
-     </div>
-     <Paginate numPage={numPage} cantPage={cantPage} />
-   </div>
- );
+    <div>
+      <div className={style.cards}>
+        {/* <h2>Estamos en el home y podemos mostrar y/o ver nuestras cards</h2> */}
+        {viewCharacters?.map((char, index) => {
+          return (<div key={index + 2000}>
+             <Card
+               name={char.name}
+               species={char.species}
+               id={char.id}
+               gender={char.gender}
+               image={char.image}
+               onClose={onClose}
+             />
+          </div>
+          );
+        })}
+      </div>
+      <div></div>
+      <Paginate numPage={numPage} cantPage={cantPage} />
+    </div>
+  );
 }
 
 /* class Cards extends React.Component{
