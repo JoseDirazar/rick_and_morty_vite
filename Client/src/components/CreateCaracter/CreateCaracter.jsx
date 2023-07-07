@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createCharacter } from "../../redux/actions";
 import { useNavigate } from "react-router-dom";
+import style from "./CreateCaracter.module.css"
 
 
 
@@ -66,7 +67,7 @@ export default function CreateCharacter() {
   };
 
   return (
-    <div /* className={style.container} */>
+    <div  className={style.container} >
       <form onSubmit={handleSubmit}>
         <label>Id:</label>
         <input

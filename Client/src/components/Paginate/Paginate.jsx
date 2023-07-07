@@ -1,13 +1,14 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { prev, next } from "../../redux/actions";
+import style from "./Paginate.module.css"
 
 
 export default function Paginate({ numPage, cantPage }) {
   const dispatch = useDispatch();
   return (
-    <div /* className={style.container} */ >
-      <div /* className={style.paginate} */>
+    <div  className={style.container}  >
+      <div  className={style.paginate} >
         {numPage <= 1 ? (
           <>
             <div></div>

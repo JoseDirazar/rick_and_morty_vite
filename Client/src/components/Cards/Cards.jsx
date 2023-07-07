@@ -19,11 +19,11 @@ export default function Cards({ onClose }) {
 
   return (
     <div>
+      <Paginate numPage={numPage} cantPage={cantPage} />
       <div className={style.cards}>
-        {/* <h2>Estamos en el home y podemos mostrar y/o ver nuestras cards</h2> */}
-        {viewCharacters?.map((char, index) => {
-          return (<div key={index + 2000}>
-             <Card
+        {viewCharacters?.map((char) => {
+          return <Card
+               key={char.id}
                name={char.name}
                species={char.species}
                id={char.id}
@@ -31,11 +31,9 @@ export default function Cards({ onClose }) {
                image={char.image}
                onClose={onClose}
              />
-          </div>
-          );
-        })}
+         })}
       </div>
-      <Paginate numPage={numPage} cantPage={cantPage} />
+      
     </div>
   );
 }

@@ -102,7 +102,7 @@ function App() {
       );
       if (data.access) {
         setAccess(true);
-        console.log("Response del Back: ",data.access)
+        console.log("Access status (get response): ",data.access)
         navigate("/home");
         return
       } else {

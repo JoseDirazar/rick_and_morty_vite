@@ -1,5 +1,6 @@
 import { useState } from "react";
 import validateUserData from "../../validation";
+import style from "./Form.module.css"
 
 export default function Form({ login }) {
   const [userData, setUserData] = useState({
@@ -20,8 +21,8 @@ export default function Form({ login }) {
     login(userData);
   }
 
-  return (
-    <form style={{ backgroundColor: "orange" }} onSubmit={handleSubmit}>
+  return (<div className={style.login}>
+    <form  onSubmit={handleSubmit}>
       <img
         src="/form_logo.png"
         alt="Form img"
@@ -54,5 +55,6 @@ export default function Form({ login }) {
       <hr />
       <button type="submit">Submit</button>
     </form>
+  </div>
   );
 }

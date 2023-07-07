@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react"
+import style from "./Detail.module.css"
 export default function Detail() {
 
     const {id} = useParams()
@@ -18,13 +19,21 @@ export default function Detail() {
         return setCharacter({});
     }, [id]);
     
-    //console.log("consologueando characters",character)
-    return <div>
-        <h1>{character.name}</h1>
-        <h3>STATUS | {character.status}</h3>
-        <h3>SPECIES | {character.species}</h3>
-        <h3>GENDER | {character.gender}</h3>
-        <h3>ORIGIN | {character.origin?.name}</h3>
-        <img src={character.image} alt={character.name}/> 
-     </div>
+    
+    return (
+      <div className={style.detail}>
+        <div className={style.text}>
+          <h3>Id: {id}</h3>
+          <h1>{character.name}</h1>
+          <h2>Status: {character.status}</h2>
+          <p>Specie: {character.species}</p>
+          <p>Gender: {character.gender}</p>
+          <p>Origin: {character.origin?.name}</p>
+        </div>
+        <div className={style.img}>
+          <img src={character.image} alt={character.name}></img>
+        </div>
+      </div>
+    )
+  
 }

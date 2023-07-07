@@ -3,16 +3,16 @@ import Card from "../Card/Card"
 import { useState } from "react"
 import {  useDispatch, useSelector } from "react-redux"
 import { orderCards, filterCards } from "../../redux/actions"
+import style from "../Cards/Cards.module.css"
 
 const Favorites = ({myFavorites}) => {
     
-    
     const store = useSelector(state => state.myFavorites)
+    
     const dispatch = useDispatch()
 
-   
-    
     const [aux, setAux] = useState(false)
+
     function handleOrder(event) {
         dispatch(orderCards(event.target.value))
         setAux(!aux)
@@ -22,7 +22,7 @@ const Favorites = ({myFavorites}) => {
 
     }
     return (
-        <div>
+        <div className={style.cards}>
         <select onChange={handleOrder}>
             <option value="A">Ascendente</option>
             <option value="D">Descendente</option>
@@ -34,7 +34,7 @@ const Favorites = ({myFavorites}) => {
             <option value="unknown">unknown</option>
             <option value="allCharacters">All Characters</option>
         </select> 
-        {store?.map(fav => { 
+        {store?.map(fav => {  
             return (<div key={fav.id + 826}>
                 <Card 
                 id={fav.id} 
