@@ -10,7 +10,7 @@ import Form from "./components/Form/Form";
 import Error404 from "./components/Error404/Error404";
 import Favorites from "./components/Favorites/Favorites";
 import { useSelector, useDispatch } from "react-redux";
-import { addChar, removeChar, removeFav, addFav } from "./redux/actions";
+import { addChar, removeChar, removeFav, addFav, llamarFavs } from "./redux/actions";
 import CreateCharacter from "./components/CreateCaracter/CreateCaracter";
 
 function App() {
@@ -102,7 +102,7 @@ function App() {
       );
       if (data.access) {
         setAccess(true);
-        console.log("Access status (get response): ",data.access)
+        console.log("Access status (GET /login): ",data.access)
         navigate("/home");
         return
       } else {
@@ -126,7 +126,7 @@ function App() {
     async function inEffect() {
       try {
         const {data} = await axios.get(`http://localhost:3001/rickandmorty/fav`)
-        data.forEach(character => dispatch(addFav(character)))
+        data.forEach(character => dispatch(llamarFavs(character)))
       } catch (error) {
         console.log(error)
       }
@@ -137,7 +137,7 @@ function App() {
 
   useEffect(() => {
     const requests = [];
-    for (let num = 48; num < 55; num++) {
+    for (let num = 35; num < 55; num++) {
       requests.push(
         axios.get(`http://localhost:3001/rickandmorty/page/${num}`)
       );

@@ -9,10 +9,17 @@ import {
   RESET,
   ADD_CHAR,
   REMOVE_CHAR,
+  LLAMAR_FAVS,
 } from "./accionTypes";
 
 import axios from "axios"
 
+export function llamarFavs(payload) {
+  return {
+    type: LLAMAR_FAVS,
+    payload: payload
+  }
+}
 export function addChar(char) {
   return {
     type: ADD_CHAR,
@@ -75,7 +82,7 @@ export const removeFav = (id) => {
   return (dispatch) => {
      axios.delete(endpoint).then(({ data }) => {
         return dispatch({
-           type: 'REMOVE_FAV',
+           type: REMOVE_FAV,
            payload: data,
      });
      });

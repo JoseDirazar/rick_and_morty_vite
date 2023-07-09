@@ -1,4 +1,4 @@
-import { ADD_FAV, REMOVE_FAV, FILTER, ORDER, RESET, CREATE_CHAR, REMOVE_CHAR, NEXT, PREV, ADD_CHAR  } from "./accionTypes";
+import { ADD_FAV, REMOVE_FAV, FILTER, ORDER, RESET, CREATE_CHAR, REMOVE_CHAR, NEXT, PREV, ADD_CHAR, LLAMAR_FAVS  } from "./accionTypes";
 
 const initialState = {
   characters: [],
@@ -6,22 +6,21 @@ const initialState = {
   allCharactersFav: [],
   numPage: 1
 };
-/* const reducer = (state = initialState, action) => {
-    switch(action.type) {
-        case SET_CARD:
-            return {
-            ...state,
-            cards: [...state.cards, action.payload]
-      };
-      case GET_CARD:
-          return {...state, cards: [...state.cards, action.payload]};
-          default:
-              return {...state}
-            }
-        } */
+
 
 const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
+    case CREATE_CHAR:
+      return {
+        ...state,
+        characters: [payload, ...state.characters]
+      }
+    case LLAMAR_FAVS:
+      return {
+        ...state,
+        myFavorites: [payload, ...state.myFavorites],
+        allCharactersFav: [payload, ...state.myFavorites]
+      }
     case ADD_CHAR:
       if (Array.isArray(payload)) {
         return {
@@ -29,7 +28,6 @@ const reducer = (state = initialState, { type, payload }) => {
           characters: [...payload],
         };
       }
-
       return {
         ...state,
         characters: [payload, ...state.characters],
@@ -50,13 +48,13 @@ const reducer = (state = initialState, { type, payload }) => {
       };
       case REMOVE_FAV:
       return { ...state, myFavorites: payload};
-    /* case REMOVE_FAV:
-      const filtrados = state.myFavorites.filter((fav) => fav.id !== payload)
-      return {
-        ...state,
-        myFavorites: filtrados,
-        allCharactersFav: filtrados
-      }; */
+      /*case REMOVE_FAV:
+        const filtrados = state.myFavorites.filter((fav) => fav.id !== payload)
+        return {
+          ...state,
+          myFavorites: filtrados,
+          allCharactersFav: filtrados
+        }; */
     case FILTER:
       const allCharactersFavFiltered = state.allCharactersFav.filter(
         (character) => character.gender === payload
