@@ -29,8 +29,9 @@ async function postFav(req, res) {
 
 async function deleteFav(req, res) {
  try {
-  const { id } = req.params;
-  const char = Favorite.findByPk(Number(id))
+  const { id } = req.params
+  const char = Favorite.findByPk(id)
+  //console.log(char)
   if(char){
     await Favorite.destroy({
       where: {
@@ -38,6 +39,7 @@ async function deleteFav(req, res) {
       }
     })
     const favorites = Favorite.findAll()
+    //console.log(favorites)
     return res.status(200).json(favorites)
   } else {
     return res.status(404).json({error: "El personaje ya ah sido eliminado."})

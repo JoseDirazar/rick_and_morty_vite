@@ -3,7 +3,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import { addFav, removeFav } from "../../redux/actions";
 import { connect } from "react-redux";
 import { useEffect, useState } from "react";
-function Card({ addFav, removeFav, name, species, id, gender, image, onClose, myFavorites }) {
+function Card({ addFav, removeFav, name, species, status, origin, id, gender, image, onClose, myFavorites }) {
   //consolelog()
   const [isFav, setIsFav] = useState(false);
 
@@ -13,7 +13,7 @@ function Card({ addFav, removeFav, name, species, id, gender, image, onClose, my
       removeFav(id);
     } else {
       setIsFav(true);
-      addFav({ name, species, id, gender, image, onClose });
+      addFav({ name, species, status, origin, id, gender, image, onClose });
     }
   };
   useEffect(() => {

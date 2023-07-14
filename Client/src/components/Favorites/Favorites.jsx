@@ -35,14 +35,14 @@ const Favorites = ({myFavorites}) => {
             <option value="allCharacters">All Characters</option>
         </select> 
         {store?.map(fav => {  
-            return (<div key={fav.id + 826}>
+            return (<div key={fav?.id + 826}>
                 <Card 
-                id={fav.id} 
-                name={fav.name}
-                species={fav.species}
-                gender={fav.gender}
-                image={fav.image}
-                onClose={fav.onClose}
+                id={fav?.id} 
+                name={fav?.name}
+                species={fav?.species}
+                gender={fav?.gender}
+                image={fav?.image}
+                onClose={fav?.onClose}
                 />
             </div>
 

@@ -11,7 +11,7 @@ module.exports = (sequelize) => {
          type: DataTypes.STRING
       },
       status:{
-         type: DataTypes.STRING
+         type: DataTypes.STRING,
       },
       species:{
          type: DataTypes.STRING
@@ -20,7 +20,7 @@ module.exports = (sequelize) => {
          type: DataTypes.STRING
       },
       origin:{
-         type: DataTypes.STRING
+         type: DataTypes.STRING,
       },
       image:{
          type: DataTypes.STRING,

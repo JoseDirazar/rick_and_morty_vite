@@ -8,7 +8,7 @@ const getPage = (req, res) => {
   const startIndex = (num - 1) * pageSize;
   const endIndex = startIndex + pageSize;
   const slicedCharacters = characters.slice(startIndex, endIndex);
-
+  
   if (slicedCharacters) {
     return res.status(200).json(slicedCharacters);
   }

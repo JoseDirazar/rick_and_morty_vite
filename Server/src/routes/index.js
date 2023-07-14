@@ -22,9 +22,7 @@ router.get('/login', (req,res) => {
 
 router.get("/logout", logOut)
 
-router.post('/fav', (req,res) => {
-    postFav(req,res)
-});
+router.post('/fav', postFav);
 
 router.get("/fav", getFav)
 
