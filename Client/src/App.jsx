@@ -76,10 +76,11 @@ function App() {
 
     axios(`http://localhost:3001/rickandmorty/character/${id}`)
       .then(({ data }) => {
+        
         if (data.name) {
           const char = characters.find((ch) => ch.id === Number(id));
           if (char) return alert("El personaje ya existe");
-          dispatch(addChar(data));
+          dispatch(addChar({id:id, ...data}));
         } else {
           window.alert("¡No hay personajes con este ID!");
         }
@@ -137,7 +138,7 @@ function App() {
 
   useEffect(() => {
     const requests = [];
-    for (let num = 35; num < 55; num++) {
+    for (let num = 20; num < 37; num++) {
       requests.push(
         axios.get(`http://localhost:3001/rickandmorty/page/${num}`)
       );

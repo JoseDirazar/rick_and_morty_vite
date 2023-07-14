@@ -3,6 +3,7 @@ const server = express()
 const router = require("./routes/index")
 const morgan = require('morgan')
 const PORT = 3001
+const {conn} = require("./DB_connection")
 
 server.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -24,7 +25,10 @@ server.use(morgan("dev"))
 
 server.use("/rickandmorty", router)
 
-server.listen(PORT, () => console.log("localhost:" + PORT))
+server.listen(PORT, async () => {
+  console.log("localhost:" + PORT); 
+  await conn.sync({force: true})
+})
 
 /* let http = require("http");
 const characters = require("./utils/data.js");

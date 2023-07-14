@@ -28,7 +28,7 @@ router.post('/fav', (req,res) => {
 
 router.get("/fav", getFav)
 
-router.delete('/fav/:id', deleteFav); // es lo misomo!!!!!
+router.delete('/fav/:id', deleteFav)
 
 router.get('/page/:num', getPage)
 
