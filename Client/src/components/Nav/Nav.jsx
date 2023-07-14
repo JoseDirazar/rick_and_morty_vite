@@ -7,7 +7,7 @@ export default function Nav({ onSearch, logOut }) {
   const { pathname } = useLocation();
   return (
     <nav className={style.nav}>
-      <div className="navButtons">
+      <div className={style.buttons}>
         <NavLink className={style.link} to="/home">
           Home
         </NavLink>
