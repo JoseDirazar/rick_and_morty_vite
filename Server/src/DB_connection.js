@@ -2,13 +2,14 @@ require("dotenv").config();
 const { Sequelize } = require("sequelize");
 const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 
+
 const sequelize = new Sequelize(
-  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}}/rickandmorty`,
+  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:5432/rickandmorty`,
   { logging: false, native: false }
 );
 const models = require("./models/index")
 
-for (const key in models) {
+for (let key in models) {
   models[key](sequelize);
 }
 

@@ -1,8 +1,8 @@
-const users = require("./User")
-const favorites = require("./Favorite")
+const usuarios = require("./User")
+const favoritos = require("./Favorite")
 
 
 module.exports = {
-    users,
-    favorites
+    usuarios,
+    favoritos
 }

@@ -5,6 +5,7 @@ const morgan = require('morgan')
 const PORT = 3001
 const {conn} = require("./DB_connection")
 
+
 server.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Credentials', 'true');
@@ -20,6 +21,8 @@ server.use((req, res, next) => {
 });
 
 server.use(express.json())
+
+server.use(express.urlencoded({ extended: false }))
  
 server.use(morgan("dev"))
 

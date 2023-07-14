@@ -23,14 +23,14 @@ async function postFav(req, res) {
   return res.status(200).json(favorites);
 
   } catch (error) {
-    res.status(512).json({error: error})
+    res.status(404).json({error: error})
   }
 }
 
 async function deleteFav(req, res) {
  try {
   const { id } = req.params;
-  const char = Favorite.findByPk(id)
+  const char = Favorite.findByPk(Number(id))
   if(char){
     await Favorite.destroy({
       where: {
